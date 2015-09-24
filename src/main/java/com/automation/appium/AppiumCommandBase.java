@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import com.automation.utils.PropertyFileReader;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -239,6 +240,21 @@ public class AppiumCommandBase extends DriverInstance{
 			logger.error(e);
 		}
 		return propertyValue;
+	}
+	
+	/**
+	 * Check element present.
+	 *
+	 * @param byLocator the by locator
+	 * @return true, if successful
+	 */
+	public boolean checkElementPresent(By byLocator){
+		try {
+			findElement(byLocator);
+            return true;
+        } catch (Exception e) {
+            return false;
+        } 
 	}
 
 }
